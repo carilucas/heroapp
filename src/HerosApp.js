@@ -7,6 +7,7 @@ const init = ()=>(
    JSON.parse(localStorage.getItem('user')) || { logged: false }
 );
 
+const heroImages = require.context('./assets/heroes/',true);
 
 export const HerosApp = () => {
 
@@ -18,7 +19,7 @@ export const HerosApp = () => {
    }, [user])
 
    return (
-      <AuthCotext.Provider value={{user,dispatchUser}}>
+      <AuthCotext.Provider value={{user,dispatchUser, heroImages}}>
          <AppRouter />
       </AuthCotext.Provider>
    )

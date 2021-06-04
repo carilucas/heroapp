@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useHistory } from 'react-router'
+import { AuthCotext } from '../../auth/authContext';
+
 
 export const HeroListItem = ({ id, publisher,superhero }) => {
+   const {heroImages} = useContext(AuthCotext)
    const history = useHistory();
 
    const handleHero = (id)=>{
@@ -11,7 +14,11 @@ export const HeroListItem = ({ id, publisher,superhero }) => {
    return (
       <div className="col-sm-4 my-3">
          <div className="card" >
-            <img src={`./assets/heroes/${id}.jpg`} className="card-img-top" alt={superhero} />
+            <img 
+               src={ heroImages(`./${id}.jpg`).default } 
+               className="card-img-top" 
+               alt={superhero} 
+            />
             <div className="card-body">
                <h5 className="card-title">{superhero}</h5>
                <p className="card-text">{publisher}</p>

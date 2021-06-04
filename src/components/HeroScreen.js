@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Redirect, useParams } from 'react-router';
 import { getHeroById } from '../helpers/getHeroById';
+import {AuthCotext} from '../auth/authContext'
+
+
+
 
 export const HeroScreen = ({history}) => {
    const {heroId} = useParams();
    const hero = getHeroById(heroId);
+
+   const {heroImages} = useContext(AuthCotext)
    
    if (!hero) {
       
@@ -27,7 +33,12 @@ export const HeroScreen = ({history}) => {
          <hr/>
          <div className="row">
             <div className="col-sm-4 animate__animated animate__fadeIn">
-               <img src={`../assets/heroes/${id}.jpg`} alt={superhero} className="img-fluid" />
+               <img 
+                  // src={`../assets/heroes/${id}.jpg`} 
+                  src={ heroImages( `./${id}.jpg` ).default }
+                  alt={superhero} 
+                  className="img-fluid" 
+               />
             </div>
             <div className="col-sm-8 animate__animated animate__fadeIn">
             <ul className="list-group">
